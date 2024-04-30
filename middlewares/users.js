@@ -1,4 +1,8 @@
 const users = require("../models/user");
+const {
+  checkIsUserExists,
+  checkEmptyNameAndEmailAndPassword,
+} = require("./middleware");
 
 const findAllUsers = async (req, res, next) => {
   req.usersArray = await users.find({});
@@ -11,7 +15,10 @@ const createUser = async (req, res, next) => {
     req.user = await users.create(req.body);
     next();
   } catch (error) {
-    res.status(400).send("Error creating user");
+    res.setHeader("Content-Type", "application/json");
+    res
+      .status(400)
+      .send(JSON.stringify({ message: "Ошибка создания пользователя" }));
   }
 };
 
@@ -21,8 +28,41 @@ const findUserById = async (req, res, next) => {
     req.user = await users.findById(req.params.id);
     next();
   } catch (error) {
-    res.status(404).send({ message: "User not found" });
+    res.setHeader("Content-Type", "application/json");
+    res
+      .status(404)
+      .send(JSON.stringify({ message: "Пользователь не найдена" }));
   }
 };
 
-module.exports = { findAllUsers, createUser, findUserById };
+const updateUser = async (req, res, next) => {
+  try {
+    req.user = await users.findByIdAndUpdate(req.params.id, req.body);
+    next();
+  } catch (error) {
+    res.status(400).send({ message: "Ошибка обновления пользователя" });
+  }
+};
+
+const deleteUser = async (req, res, next) => {
+  console.log("DELETE /users/:id");
+  try {
+    req.user = await users.findByIdAndDelete(req.params.id);
+    next();
+  } catch (error) {
+    res.setHeader("Content-Type", "application/json");
+    res
+      .status(400)
+      .send(JSON.stringify({ message: "Ошибка удаления пользователя" }));
+  }
+};
+
+module.exports = {
+  findAllUsers,
+  createUser,
+  findUserById,
+  updateUser,
+  deleteUser,
+  checkIsUserExists,
+  checkEmptyNameAndEmailAndPassword,
+};
