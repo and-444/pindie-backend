@@ -8,6 +8,7 @@ const {
   deleteUser,
   checkIsUserExists,
   checkEmptyNameAndEmailAndPassword,
+  checkEmptyNameAndEmail,
 } = require("../middlewares/users");
 
 const {
@@ -17,7 +18,6 @@ const {
   sendUserUpdated,
   sendUserDeleted,
 } = require("../controllers/users");
-const { checkEmptyNameAndEmail } = require("../middlewares/middleware");
 
 usersRouter.get("/users", findAllUsers, sendAllUsers);
 
