@@ -20,8 +20,10 @@ const login = (req, res) => {
         email: user.email,
         jwt: token,
       });
+    })
+    .catch((error) => {
+      res.status(401).send({ message: error.message });
     });
-  // Остальной код
 };
 
 const sendIndex = (req, res) => {
