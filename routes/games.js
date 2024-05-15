@@ -10,7 +10,10 @@ const {
   checkIsGameExists,
   checkIfCategoriesAvaliable,
   checkIfUsersAreSafe,
+  checkIsVoteRequest,
 } = require("../middlewares/games");
+
+const { checkAuth } = require("../middlewares/auth");
 
 const {
   sendAllGames,
@@ -28,6 +31,7 @@ gamesRouter.post(
   checkIsGameExists,
   checkIfCategoriesAvaliable,
   checkEmptyFields,
+  checkAuth,
   createGame,
   sendGameCreated
 );
@@ -35,14 +39,16 @@ gamesRouter.post(
 gamesRouter.put(
   "/games/:id",
   findGameById,
+  checkIsVoteRequest,
   checkIfUsersAreSafe,
   checkIfCategoriesAvaliable,
   checkEmptyFields,
+  checkAuth,
   updateGame,
   sendGameUpdated
 );
 
 gamesRouter.get("/games/:id", updateGame, sendGameUpdated);
-gamesRouter.delete("/games/:id", deleteGame, sendGameDeleted);
+gamesRouter.delete("/games/:id", checkAuth, deleteGame, sendGameDeleted);
 
 module.exports = gamesRouter;
