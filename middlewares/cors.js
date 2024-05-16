@@ -1,7 +1,5 @@
-const allowedCors = [
-  "https://and-pindie-frontend.nomoredomainswork.ru",
-  "https://and-pindie-backend.nomoredomainswork.ru",
-];
+const allowedCors = ["https://and-pindie-frontend.nomoredomainswork.ru"];
+
 function cors(req, res, next) {
   const { origin } = req.headers;
 
