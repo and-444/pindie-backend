@@ -68,18 +68,18 @@ const checkEmptyFields = async (req, res, next) => {
     next();
     return;
   }
-  // if (
-  //   !req.body.title ||
-  //   !req.body.description ||
-  //   !req.body.image ||
-  //   !req.body.link ||
-  //   !req.body.developer
-  // ) {
-  //   res.setHeader("Content-Type", "application/json");
-  //   res.status(400).send(JSON.stringify({ message: "Заполни все поля" }));
-  // } else {
-  //   next();
-  // }
+  if (
+    !req.body.title ||
+    !req.body.description ||
+    !req.body.image ||
+    !req.body.link ||
+    !req.body.developer
+  ) {
+    res.setHeader("Content-Type", "application/json");
+    res.status(400).send(JSON.stringify({ message: "Заполни все поля" }));
+  } else {
+    next();
+  }
 };
 
 const checkIfCategoriesAvaliable = async (req, res, next) => {
@@ -87,14 +87,14 @@ const checkIfCategoriesAvaliable = async (req, res, next) => {
     next();
     return;
   }
-  // if (!req.body.categories || req.body.categories.length === 0) {
-  //   res.setHeader("Content-Type", "application/json");
-  //   res
-  //     .status(400)
-  //     .send(JSON.stringify({ message: "Выберите хотя бы одну категорию" }));
-  // } else {
-  //   next();
-  // }
+  if (!req.body.categories || req.body.categories.length === 0) {
+    res.setHeader("Content-Type", "application/json");
+    res
+      .status(400)
+      .send(JSON.stringify({ message: "Выберите хотя бы одну категорию" }));
+  } else {
+    next();
+  }
 };
 
 const checkIsGameExists = async (req, res, next) => {
