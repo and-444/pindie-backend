@@ -1,13 +1,4 @@
-const allowedCors = [
-  "localhost:3000",
-  "localhost:3001",
-  "and-pindie-frontend.nomoredomainswork.ru",
-  "and-pindie-backend.nomoredomainswork.ru",
-  "https://and-pindie-frontend.nomoredomainswork.ru",
-  "http://and-pindie-frontend.nomoredomainswork.ru",
-  "https://and-pindie-backend.nomoredomainswork.ru",
-  "http://and-pindie-backend.nomoredomainswork.ru",
-];
+const allowedCors = ["https://and-pindie-frontend.nomoredomainswork.ru"];
 
 function cors(req, res, next) {
   const { origin } = req.headers;
@@ -22,6 +13,8 @@ function cors(req, res, next) {
   );
   next();
 }
+
+module.exports = cors;
 
 //   if (allowedCors.includes(origin)) {
 //     res.header("Access-Control-Allow-Origin", origin);
@@ -38,5 +31,3 @@ function cors(req, res, next) {
 
 //   next();
 // }
-
-module.exports = cors;

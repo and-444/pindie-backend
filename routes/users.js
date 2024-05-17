@@ -10,6 +10,7 @@ const {
   checkEmptyNameAndEmailAndPassword,
   checkEmptyNameAndEmail,
   hashPassword,
+  filterPassword,
 } = require("../middlewares/users");
 
 const { checkAuth } = require("../middlewares/auth");
@@ -23,7 +24,7 @@ const {
   sendMe,
 } = require("../controllers/users");
 
-usersRouter.get("/users", findAllUsers, sendAllUsers);
+usersRouter.get("/users", findAllUsers, filterPassword, sendAllUsers);
 
 usersRouter.post(
   "/users",
@@ -45,7 +46,7 @@ usersRouter.put(
 );
 
 usersRouter.get("/me", checkAuth, sendMe);
-usersRouter.get("/users/:id", updateUser, sendUserUpdated);
+usersRouter.get("/users/:id", updateUser, filterPassword, sendUserUpdated);
 usersRouter.delete("/users/:id", checkAuth, deleteUser, sendUserDeleted);
 
 module.exports = usersRouter;
