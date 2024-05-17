@@ -1,4 +1,5 @@
 const users = require("../models/user.js");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const path = require("path");
 
@@ -25,20 +26,6 @@ const login = (req, res) => {
       res.status(401).send({ message: error.message });
     });
 };
-
-// const sendIndex = (req, res) => {
-//   if (req.cookies.jwt) {
-//     try {
-//       jwt.verify(req.cookies.jwt, "some-secret-key");
-//       return res.sendFile(
-//         path.join(__dirname, "../public/admin/dashboard.html")
-//       );
-//     } catch (err) {
-//       res.sendFile(path.join(__dirname, "../public/index.html"));
-//     }
-//   }
-//   res.sendFile(path.join(__dirname, "../public/index.html"));
-// };
 
 const sendIndex = (req, res) => {
   if (req.cookies.jwt) {

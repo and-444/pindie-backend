@@ -14,7 +14,6 @@ const checkAuth = (req, res, next) => {
   } catch (err) {
     return res.status(401).send({ message: "Необходима авторизация" });
   }
-
   next();
 };
 
@@ -23,7 +22,6 @@ const checkCookiesJWT = (req, res, next) => {
     return res.redirect("/");
   }
   req.headers.authorization = `Bearer ${req.cookies.jwt}`;
-
   next();
 };
 
