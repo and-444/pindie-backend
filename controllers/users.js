@@ -12,9 +12,14 @@ const sendUserCreated = (req, res) => {
   res.end(JSON.stringify(req.user));
 };
 
+// const sendUserUpdated = (req, res) => {
+//   res.setHeader("Content-Type", "application/json");
+//   res.end({ message: "Пользователь обновлён" });
+// };
+
 const sendUserUpdated = (req, res) => {
   res.setHeader("Content-Type", "application/json");
-  res.end({ message: "Пользователь обновлён" });
+  res.status(200).send(JSON.stringify({ message: "Пользователь обновлён" }));
 };
 
 const sendUserById = (req, res) => {
